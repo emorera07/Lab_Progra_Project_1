@@ -1,0 +1,7 @@
+02/05/2021
+
+todo<Dualock> Revisar la libreria y manejo de archivos de salida, subir la estructura del proyecto.
+todo<Bran> Revisar la libreria y manejo de archivo de entrada.
+todo<Emmanuel> Revisar la libreria y crear un ejemplo, crear una carpeta temporal para versiones de make.
+
+Se define hacer modular (modulo de entrada, modulo de voronoi, modulo salida (Revisar la salida de libreria o si no otra OpenGL), main).
