@@ -16,3 +16,22 @@ Comandos:
 
 	*Instalar CGAL
 	 sudo apt-get install libcgal-dev
+
+
+	*Agregar los examples de CGAL para correrlos luego
+	sudo apt-get install g++ cmake libcgal-demo
+	tar --gzip -xf /usr/share/doc/libcgal-demo/examples.tar.gz
+
+	*Ir a la direccion
+	cd examples/
+	
+	*Dentro de un ejemplo se corre el siguiente comando
+	cmake -DCMAKE_BUILD_TYPE=Release .
+	make
+
+	*Luego correr ejecutable
+	./ejecutable
+
+	*FALTA
+	Buscar como agregar la libreria 
+	<CGAL/draw_voronoi_diagram_2.h>
