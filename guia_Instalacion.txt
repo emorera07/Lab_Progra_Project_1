@@ -7,7 +7,7 @@ Comandos:
 
 	*Instalar Boost
 	 sudo apt install libboost-dev
-	 
+
 	*Instalar GMP
 	 sudo apt-get install m4
 
@@ -17,21 +17,34 @@ Comandos:
 	*Instalar CGAL
 	 sudo apt-get install libcgal-dev
 
+	*Instalar Qt
+	sudo apt-get install qt5-default
 
+	
 	*Agregar los examples de CGAL para correrlos luego
 	sudo apt-get install g++ cmake libcgal-demo
 	tar --gzip -xf /usr/share/doc/libcgal-demo/examples.tar.gz
 
 	*Ir a la direccion
 	cd examples/
-	
+
+	*Crear el correcto CMakeLists para CGAL
+	cgal_create_CMakeLists
 	*Dentro de un ejemplo se corre el siguiente comando
-	cmake -DCMAKE_BUILD_TYPE=Release .
+	cmake -DCMAKE_BUILD_TYPE=Release -DCGAL_USE_BASIC_VIEWER=ON .
 	make
 
 	*Luego correr ejecutable
 	./ejecutable
 
-	*FALTA
-	Buscar como agregar la libreria 
-	<CGAL/draw_voronoi_diagram_2.h>
+	Agregar la libreria Faltantes:
+	Ambas librerias estan en la carpeta incl
+
+	Agregar la libreria faltante draw:	draw_voronoi_diagram_2.h
+	https://fossies.org/linux/CGAL/include/CGAL/draw_voronoi_diagram_2.h
+	Lo agrego a mi path en /usr/include/CGAL pero puede variar
+	sudo cp -rfp incl/draw_voronoi_diagram_2.h /usr/include/CGAL/
+
+	Agregar la libreria faltante de Qt: Basic_viewer_qt.h
+	https://fossies.org/linux/CGAL/include/CGAL/Qt/Basic_viewer_qt.h
+	sudo cp -rfp incl/Basic_viewer_qt.h /usr/include/CGAL/Qt/
