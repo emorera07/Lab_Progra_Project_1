@@ -58,10 +58,14 @@ para instalar las bibliotecas necesarias ejecute (probado en ubuntu 20.04 LTS), 
 # How to run
 ejemplo de prueba:
 luego de instalar las dependencias, clone el reposiorio.
-mkdir build
-cd build
-g++ ../src/main.cpp -o voronoi -lgraph -DNO_FREETYPE `sdl2-config --cflags --libs` -lSDL2 -lSDL2_image -lSDL2_ttf -DN_SIDES_5
-./voronoi > prueba.pnm
+
+`mkdir build`
+
+`cd build`
+
+`g++ ../src/main.cpp -o voronoi -lgraph -DNO_FREETYPE `sdl2-config --cflags --libs` -lSDL2 -lSDL2_image -lSDL2_ttf -DN_SIDES_5`
+
+`./voronoi > prueba.pnm`
 
 # Sobre la compilacion
 Toda la linea de compilacion se mantiene a excepcion del parametro -DN_SIDES_x, este varia segun la cantidad de puntos a leer, algo que se supone que el usuario conoce de antemano. X es la cantidad de puntos del archivo de texto, X e [1,2,3,4...,99,100]. El maximo numero de puntos posibles a analizar es de 100 es decir, con la bandera -DN_SIDES_100.
