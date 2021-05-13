@@ -2,11 +2,24 @@
 #include <stdlib.h>
 #include <string.h>
 
+
 #define N_SITES 13
+
+#include "defN_SIDES.h"
+
+
+//#ifdef N_SITES_10
+//#define N_SITES 10
+//#else
+//#define N_SITES 5
+//#endif
+
+
+
 double site[N_SITES][2];
 unsigned char rgb[N_SITES][3];
 
-int size_x = 640, size_y = 400;
+int size_x = 640, size_y = 480;
 
 
 static inline double sq2(double x, double y)
@@ -43,7 +56,7 @@ int at_edge(int *color, int y, int x)
 	return 0;
 }
 
-#define AA_RES 4 /* average over 4x4 supersampling grid */
+#define AA_RES 32 /* average over 4x4 supersampling grid */
 void aa_color(unsigned char *pix, int y, int x)
 {
 	int i, j, n;

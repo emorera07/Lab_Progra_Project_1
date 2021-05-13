@@ -21,8 +21,7 @@
 using namespace std;
 
 int drawtxt( vector<int> xy, vector<string> coordenadas, string archivo, int fontsize )
-{   
-    /*for the tap window screen*/
+{   /*for the tap window screen*/
     SDL_Surface *screen;    // surface to convert to window object and plot (like a canva) 
     SDL_Window  *window;    // window struct to plot
     SDL_Surface *image;     // surface to charge readed image, image can bi .png or .pnm
@@ -37,14 +36,16 @@ int drawtxt( vector<int> xy, vector<string> coordenadas, string archivo, int fon
     if ( TTF_Init() < 0 ) {             // checking for errors
 	    cout << "Error initializing SDL_ttf: " << TTF_GetError() << endl;
     }
-    font = TTF_OpenFont("font.ttf", fontsize);          // opening font, must be in same folder
+    font = TTF_OpenFont("../data/font.ttf", fontsize);          // opening font, must be in same folder
     if ( !font ) {                                      // getting nulls
 	    cout << "Failed to load font: " << TTF_GetError() << endl;
     }
     
     /* Loading the image */
-    SDL_Init(SDL_INIT_VIDEO);                   // init video mode to render surfaces
-    image = IMG_Load( archivo.c_str() );             // loads image, just change de extension .png or .pnm
+    SDL_Init(SDL_INIT_VIDEO); 
+    //cout << "HERE" << endl;                  // init video mode to render surfaces
+    image = IMG_Load( archivo.c_str() );       // loads image, just change de extension .png or .pnm
+    //cout << "HERE" << endl; 
     int w = image->w;                           // getting image width
     int h = image->h;                           // getting image high
     dstrect.x = 0;                              // this four lines are to set a rectange (canva) to plot the image over,
@@ -53,35 +54,17 @@ int drawtxt( vector<int> xy, vector<string> coordenadas, string archivo, int fon
     dstrect.h = h;                              // 
 
     window = SDL_CreateWindow("SDL2 Voronoi Diagram", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, w, h, 0);       // create a window, first layer
+    cout << "HERE" << endl; 
     screen = SDL_GetWindowSurface(window);                  // instead of creating a renderer, draw directly to the screen, second layer
     SDL_BlitSurface(image, NULL, screen, &dstrect);         // print the image using the rectangle dstrect (all the screen), third layer 
     
     
     /* TEXT */ //from file data read -> point x,y and NP number of points
-    int NP = coordenadas.size();         // this is just a test, real values come from a file read. skip
-    /*vector<int> Sites;
-    Sites.push_back(0);
-    Sites.push_back(50);
-    Sites.push_back(0);
-    Sites.push_back(-50);
-
-    Sites.push_back(-50);
-    Sites.push_back(0);
-    Sites.push_back(50);
-    Sites.push_back(0);
-    
-    vector<string> xtexty;
-    xtexty.push_back("(0,50)");
-    xtexty.push_back("(0,-50)");
-    xtexty.push_back("(-50,0)");
-    xtexty.push_back("(50,0)");*/
-
-    //NP = xtexty.size();         //number of points = number of sides of the voronoi diagram
-    
-    int maxX = 0;               // variables for max-min points of X and Y
-    int maxY = 0;               // will be used to obtain the scaling kx and ky
-    int minX = 0;               //
-    int minY = 0;               // the following for loops are to obtain these values
+    int NP = coordenadas.size();        // this is just a test, real values come from a file read. skip
+    int maxX = 0;                       // variables for max-min points of X and Y
+    int maxY = 0;                       // will be used to obtain the scaling kx and ky
+    int minX = 0;                       //
+    int minY = 0;                       // the following for loops are to obtain these values
 
     for (int i = 0; i < xy.size(); i = i+2)
     {
