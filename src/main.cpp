@@ -6,6 +6,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include "../include/drawtxt.h"
 
 
 #define frand(x) (rand() / (1. + RAND_MAX) * x)
@@ -15,9 +16,9 @@ int NP = 0;
 vector<int> xy;
 vector<int> x;
 vector<int> y;
+vector<string> par_ordenado;
 void leerArchivo()
 {
-	vector<string> par_ordenado;
 	ifstream file("../data/Archivo_de_entrada_2.txt");
 	string str, str1;
 	while (getline(file, str)) {
@@ -58,6 +59,8 @@ int main()
 	}
 
 	gen_map();
+	
+	drawtxt( xy, par_ordenado, "../build/prueba.pnm", 12);
 	
 	return 0;
 }
