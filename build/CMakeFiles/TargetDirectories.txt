@@ -1,0 +1,8 @@
+/home/emmanuel/Documentos/Laboratorio_de_programacion/Proyecto_1/Lab_Progra_Project_1/build/CMakeFiles/install/strip.dir
+/home/emmanuel/Documentos/Laboratorio_de_programacion/Proyecto_1/Lab_Progra_Project_1/build/CMakeFiles/install/local.dir
+/home/emmanuel/Documentos/Laboratorio_de_programacion/Proyecto_1/Lab_Progra_Project_1/build/CMakeFiles/Voronoi.dir
+/home/emmanuel/Documentos/Laboratorio_de_programacion/Proyecto_1/Lab_Progra_Project_1/build/CMakeFiles/list_install_components.dir
+/home/emmanuel/Documentos/Laboratorio_de_programacion/Proyecto_1/Lab_Progra_Project_1/build/CMakeFiles/Voronoi_exe.dir
+/home/emmanuel/Documentos/Laboratorio_de_programacion/Proyecto_1/Lab_Progra_Project_1/build/CMakeFiles/edit_cache.dir
+/home/emmanuel/Documentos/Laboratorio_de_programacion/Proyecto_1/Lab_Progra_Project_1/build/CMakeFiles/rebuild_cache.dir
+/home/emmanuel/Documentos/Laboratorio_de_programacion/Proyecto_1/Lab_Progra_Project_1/build/CMakeFiles/install.dir
