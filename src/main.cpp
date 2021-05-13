@@ -1,9 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "voronoi.h"
-
-
+#include "../include/voronoi.h"
 
 
 #define for_k for (k = 0; k < N_SITES; k++)

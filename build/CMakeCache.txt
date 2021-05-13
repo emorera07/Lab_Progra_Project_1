@@ -182,12 +182,6 @@ CMAKE_STRIP:FILEPATH=/usr/bin/strip
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
 //Value Computed by CMake
-VORONOI_BINARY_DIR:STATIC=/home/emmanuel/Documentos/Laboratorio_de_programacion/Proyecto_1/Lab_Progra_Project_1/build
-
-//Value Computed by CMake
-VORONOI_SOURCE_DIR:STATIC=/home/emmanuel/Documentos/Laboratorio_de_programacion/Proyecto_1/Lab_Progra_Project_1
-
-//Value Computed by CMake
 Voronoi_BINARY_DIR:STATIC=/home/emmanuel/Documentos/Laboratorio_de_programacion/Proyecto_1/Lab_Progra_Project_1/build
 
 //Dependencies for target
@@ -195,9 +189,6 @@ Voronoi_LIB_DEPENDS:STATIC=
 
 //Value Computed by CMake
 Voronoi_SOURCE_DIR:STATIC=/home/emmanuel/Documentos/Laboratorio_de_programacion/Proyecto_1/Lab_Progra_Project_1
-
-//Dependencies for target
-voronoi_project_LIB_DEPENDS:STATIC=
 
 
 ########################

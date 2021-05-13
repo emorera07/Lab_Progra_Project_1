@@ -9,7 +9,7 @@ set(CMAKE_BUILD_TYPE Release)
 
 ############ SOURCES FOR EXECUTABLE #############
 # Add sources for EXECUTABLE
-set(SOURCES test/main.cxx src/main.cxx)
+set(SOURCES_EXE test/main.cxx src/main.cxx)
 file(GLOB SOURCES_EXE "src/*.cxx" "test/*.cxx")
 
 # add the executable
