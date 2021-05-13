@@ -34,23 +34,23 @@ para instalar las bibliotecas necesarias ejecute (probado en ubuntu 20.04 LTS), 
 
 
 # Guía rápida para instalar Libgraph y graphics.h 
- 	`cd ~/`
+ `cd ~/`
 	
-	`wget http://download.savannah.gnu.org/releases/libgraph/libgraph-1.0.2.tar.gz`
+`wget http://download.savannah.gnu.org/releases/libgraph/libgraph-1.0.2.tar.gz`
 	
-	`tar -xvzf libgraph-1.0.2.tar.gz`
+`tar -xvzf libgraph-1.0.2.tar.gz`
 	
-	`cd libgraph-1.0.2`
+`cd libgraph-1.0.2`
 	
-	`./configure`
-	
-  `CPPFLAGS="$CPPFLAGS $(pkg-config --cflags-only-I guile-2.0)" \ CFLAGS="$CFLAGS $(pkg-config --cflags-only-other guile-2.0)" \ LDFLAGS="$LDFLAGS $(pkg-config --libs guile-2.0)"`
+`./configure`
+
+`CPPFLAGS="$CPPFLAGS $(pkg-config --cflags-only-I guile-2.0)" \ CFLAGS="$CFLAGS $(pkg-config --cflags-only-other guile-2.0)" \ LDFLAGS="$LDFLAGS $(pkg-config --libs guile-2.0)"`
   
-	`sudo make`
+`sudo make`
 	
-	`sudo make install`
+`sudo make install`
 	
-	`sudo cp /usr/local/lib/libpng.* /usr/lib`
+`sudo cp /usr/local/lib/libpng.* /usr/lib`
 	
   
 ***Al compilar con libgraph debe agregar la bandera -lgraph.***
