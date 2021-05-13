@@ -5,7 +5,7 @@
 
 # Description
 Generacion de un diagrama de Voronoi a partir de un archivo de puntos x,y utilizando las librerias graficas -libgraph, SDL, SDL2 SDL_image y SDL_ttf
-Se deben instalar todas sus dependencias para correro sin problemas.
+Se deben instalar todas sus dependencias para correrlo sin problemas.
 
 # Dependencies
 cmake
@@ -44,3 +44,8 @@ mkdir build
 cd build
 g++ ../src/main.cpp -o voronoi -lgraph -DNO_FREETYPE `sdl2-config --cflags --libs` -lSDL2 -lSDL2_image -lSDL2_ttf -DN_SIDES_5
 ./voronoi > prueba.pnm
+
+# Sobre la compilacion
+Toda la linea de compilacion se mantiene a excepcion del parametro -DN_SIDES_x, este varia segun la cantidad de puntos a leer, algo que se supone que el usuario conoce de antemano. X es la cantidad de puntos del archivo de texto, X e [1,2,3,4...,99,100]. El maximo numero de puntos posibles a analizar es de 100 es decir, con la bandera -DN_SIDES_100.
+Si desea analizar un nuevo archivo de puntos, agreguelo a la carpeta data bajo el nombre entrada1.txt, si desea cambiar este nombre, puede cambiarlo directamente en la ruta de lectura en [main.cpp](src/main.cpp), líneas 22 y 28.
+
