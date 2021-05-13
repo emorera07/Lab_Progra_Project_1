@@ -2,11 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define N_SITES 50
+#define N_SITES 13
 double site[N_SITES][2];
 unsigned char rgb[N_SITES][3];
 
-int size_x = 640, size_y = 480;
+int size_x = 640, size_y = 400;
 
 
 static inline double sq2(double x, double y)
