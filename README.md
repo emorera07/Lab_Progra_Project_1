@@ -63,7 +63,7 @@ luego de instalar las dependencias, clone el reposiorio.
 
 `cd build`
 
-`g++ ../src/main.cpp -o voronoi -lgraph -DNO_FREETYPE ``sdl2-config --cflags --libs`` -lSDL2 -lSDL2_image -lSDL2_ttf -DN_SIDES_4`
+`g++ ../src/main.cpp -o voronoi -lgraph -DNO_FREETYPE ``sdl2-config --cflags --libs`` -lSDL2 -lSDL2_image -lSDL2_ttf`
 
 **quite un par de comillas a las banderas `sdl2-config --cflags --libs` , que solo mantenga un par.**
 
