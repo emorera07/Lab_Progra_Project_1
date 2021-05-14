@@ -19,6 +19,6 @@ target_link_libraries(Voronoi PRIVATE libreria)
 
 ############ SOURCES FOR EXECUTABLE #############
 # Add sources for shared library
-add_library( libreria SHARED "./include/voronoi.h")
+add_library( libreria SHARED "./include/voronoi.h" "./include/drawtxt.h")
 target_link_libraries(libreria)
 set_target_properties(libreria PROPERTIES LINKER_LANGUAGE CXX)
