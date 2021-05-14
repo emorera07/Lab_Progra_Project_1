@@ -1,40 +1,50 @@
+/*MAIN.CPP 
+
+Voronoi Diagrams - C++
+IE724 Laboratory of programming and microcomputers, EIE, University of Costa Rica
+Esquivel M. Brandon, Morera Emmanuel, Fonseca Dualock
+brandon.esquivel@ucr.ac.cr, emmanuel.morera@ucr.ac.cr, djfonsecamo@gmail.com*/
+
+
+/*DEFINES*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../include/voronoi.h"
 #include <vector>
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include "../include/drawtxt.h"
+#include "../include/voronoi.h"
 
 
-#define frand(x) (rand() / (1. + RAND_MAX) * x)
-
+/*NAMESPACE*/
 using namespace std;
-int NP = 0;
-vector<int> xy;
-vector<int> x;
-vector<int> y;
-vector<string> par_ordenado;
-void leerArchivo()
-{
-	ifstream file("../data/Archivo_de_entrada_2.txt");
-	string str, str1;
-	while (getline(file, str)) {
+
+/*GLOBAL VAR*/
+vector<int> xy;								// store the x and y values.
+vector<int> x;								// store X values
+vector<int> y;								// store Y values
+vector<string> par_ordenado;				// store coordinate as text to plot on image
+
+/*Function read file line by line */
+int leerArchivo( string archivo)
+{	int NP;									// number of points
+	ifstream file(archivo);					// ifstream objetc init
+	string str, str1;						// temporal string
+	while (getline(file, str)) {			// reading file line by line, store entire coordinate as string
 		par_ordenado.push_back(str);		
 	}
-	file.close();
-	ifstream file1("../data/Archivo_de_entrada_2.txt");
-	while (getline(file1, str1, '\n')) {
-		stringstream ss(str1);
-		while (getline(ss, str, ',')) {
-			xy.push_back(stoi(str));
+	file.close();							// close					
+	ifstream file1(archivo);				// ifstream objetc init						
+	while (getline(file1, str1, '\n')) {	// reading x and then, y					
+		stringstream ss(str1);			
+		while (getline(ss, str, ',')) {						
+			xy.push_back(stoi(str));						
 		}			
 	}
-
-
-	for(int i = 0; i < xy.size(); i++){
+	file1.close();
+	for(int i = 0; i < xy.size(); i++){		// store values of x (even index) and y (odd index)
 		if(i%2==0){
 			x.push_back(xy[i]);
 		}
@@ -42,25 +52,26 @@ void leerArchivo()
 			y.push_back(xy[i]);	
 		}	
 	}
-	NP = par_ordenado.size();
+	NP = par_ordenado.size();				// number of points 
+	return NP;								// return
 }
 
 
-int main()
-{
-	leerArchivo();
-	int k;
-	for (k = 0; k < NP; k++) {
-		site[k][0] = x[k]+size_x/2;
-		site[k][1] = y[k] +size_y/2;
-		rgb [k][0] = frand(256);
-		rgb [k][1] = frand(256);
-		rgb [k][2] = frand(256);
+ /*Main*/
+int main(int nargs, char *args[]){				
+
+	int N_SITES;							// Number of sites = number of points
+	if(nargs < 2 || nargs > 4){				// error handle for arguments
+		cout<<"tIngrese los parametros por consola: Ruta_archivo.txt ancho alto (enteros) por favor intente de nuevo. \n"<<endl;
+		return 0;
 	}
-
-	gen_map();
-	
-	drawtxt( xy, par_ordenado, "../build/prueba.pnm", 12);
-	
-	return 0;
+	else{
+		N_SITES = leerArchivo(args[1]);					// using file address argument (1)
+		int size_x = atoi(args[2]);						// cast char to int, second and third arguments (resolution w h)
+		int size_y = atoi(args[3]);			
+		gen_map(N_SITES, size_x, size_y, x, y);			// gen voronoi diagram
+		drawtxt( xy, par_ordenado, "prueba.pnm", 6);	// draw coordinates as text over the diagram.
+		return 0;
+	}
 }
+// end program
