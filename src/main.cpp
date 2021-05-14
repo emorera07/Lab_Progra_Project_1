@@ -6,7 +6,8 @@ Esquivel M. Brandon, Morera Emmanuel, Fonseca Dualock
 brandon.esquivel@ucr.ac.cr, emmanuel.morera@ucr.ac.cr, djfonsecamo@gmail.com*/
 
 
-/*DEFINES*/
+
+/*INCLUDES*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -17,6 +18,9 @@ brandon.esquivel@ucr.ac.cr, emmanuel.morera@ucr.ac.cr, djfonsecamo@gmail.com*/
 #include "../include/drawtxt.h"
 #include "../include/voronoi.h"
 
+/*DEFINES*/
+#define W 640
+#define H 480 
 
 /*NAMESPACE*/
 using namespace std;
@@ -26,6 +30,7 @@ vector<int> xy;								// store the x and y values.
 vector<int> x;								// store X values
 vector<int> y;								// store Y values
 vector<string> par_ordenado;				// store coordinate as text to plot on image
+
 
 /*Function read file line by line */
 int leerArchivo( string archivo)
@@ -61,15 +66,15 @@ int leerArchivo( string archivo)
 int main(int nargs, char *args[]){				
 
 	int N_SITES;							// Number of sites = number of points
-	if(nargs < 2 || nargs > 4){				// error handle for arguments
-		cout<<"tIngrese los parametros por consola: Ruta_archivo.txt ancho alto (enteros) por favor intente de nuevo. \n"<<endl;
+	if(nargs != 2 ){						// error handle for arguments
+		cout<<"tIngrese el parametro por consola: ../data/Ruta_archivo.txt\n"<<endl;
 		return 0;
 	}
 	else{
 		N_SITES = leerArchivo(args[1]);					// using file address argument (1)
-		int size_x = atoi(args[2]);						// cast char to int, second and third arguments (resolution w h)
-		int size_y = atoi(args[3]);			
-		gen_map(N_SITES, size_x, size_y, x, y);			// gen voronoi diagram
+		//size_x = atoi(args[2]);						// cast char to int, second and third arguments (resolution w h)
+		//size_y = atoi(args[3]);			
+		gen_map(N_SITES, W, H, x, y);			// gen voronoi diagram
 		drawtxt( xy, par_ordenado, "prueba.pnm", 6);	// draw coordinates as text over the diagram.
 		return 0;
 	}
