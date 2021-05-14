@@ -33,18 +33,16 @@ para instalar las bibliotecas necesarias ejecute (probado en ubuntu 20.04 LTS), 
 
   
 # How to run
-ejemplo de prueba:
-luego de instalar las dependencias, clone el reposiorio.
+Entrar a la carpeta Lab_Progra_Project_1
+Dar permisos de ejecucion al archivo config.sh conn el siguiente comando
+`sudo chmod +x config.sh`
 
-`mkdir build`
+Instalar las dependencias y correr el cmake con el comando
+Para ello se ejecuta el archivo config.sh
 
-`cd build`
-
-`g++ ../src/main.cpp -o voronoi ``sdl2-config --cflags --libs`` -lSDL2 -lSDL2_image -lSDL2_ttf`
-
-**quite un par de comillas a las banderas `sdl2-config --cflags --libs` , que solo mantenga un par.**
-
+La ejecucion del config.sh lo llevara al directorio build, una vez ahi ejecutar el siguiente comando
 `./voronoi ../data/nombre_archivo.txt > prueba.pnm`
+Recordar que el archivo.txt debe estar en la carpeta data
 
 # Sobre la compilacion
 Al ejecutar verifique que la ruta del archivo de texto a leer es correcta, se generará en pantalla en resultado obtenido y se guardarán en /build las imagenes generadas, una .pnm sin texto y una .bmp con las coordenadas incluidas.
