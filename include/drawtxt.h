@@ -42,10 +42,8 @@ int drawtxt( vector<int> xy, vector<string> coordenadas, string archivo, int fon
     }
     
     /* Loading the image */
-    SDL_Init(SDL_INIT_VIDEO); 
-    //cout << "HERE" << endl;                  // init video mode to render surfaces
+    SDL_Init(SDL_INIT_VIDEO);                   // init video mode to render surfaces
     image = IMG_Load( archivo.c_str() );       // loads image, just change de extension .png or .pnm
-    //cout << "HERE" << endl; 
     int w = image->w;                           // getting image width
     int h = image->h;                           // getting image high
     dstrect.x = 0;                              // this four lines are to set a rectange (canva) to plot the image over,
@@ -54,7 +52,6 @@ int drawtxt( vector<int> xy, vector<string> coordenadas, string archivo, int fon
     dstrect.h = h;                              // 
 
     window = SDL_CreateWindow("SDL2 Voronoi Diagram", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, w, h, 0);       // create a window, first layer
-    cout << "HERE" << endl; 
     screen = SDL_GetWindowSurface(window);                  // instead of creating a renderer, draw directly to the screen, second layer
     SDL_BlitSurface(image, NULL, screen, &dstrect);         // print the image using the rectangle dstrect (all the screen), third layer 
     
@@ -107,7 +104,7 @@ int drawtxt( vector<int> xy, vector<string> coordenadas, string archivo, int fon
     }
     
     
-
+    SDL_SaveBMP(screen,"voronoi.bmp");			    // save image
 
     ////////////////////
     /* FREE STRUCTS */
@@ -116,7 +113,7 @@ int drawtxt( vector<int> xy, vector<string> coordenadas, string archivo, int fon
     SDL_FreeSurface(screen);
     /*updating window*/
     SDL_UpdateWindowSurface(window);
-    getchar();                          // wait to user event
+    SDL_Delay(10000);  			// WAIT 10s to
     TTF_CloseFont( font );              // close eviroment
     TTF_Quit();                         // quit eviroment
     SDL_DestroyWindow(window);          // close eviroment
