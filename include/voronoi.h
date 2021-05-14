@@ -1,38 +1,29 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-
-#define N_SITES 13
-
-#include "defN_SIDES.h"
-
-
-//#ifdef N_SITES_10
-//#define N_SITES 10
-//#else
-//#define N_SITES 5
-//#endif
+#include <iostream>
+#include <fstream>
+#include <vector>
 
 
 
-double site[N_SITES][2];
-unsigned char rgb[N_SITES][3];
+using namespace std;
 
-int size_x = 640, size_y = 480;
+#define frand(x) (rand() / (1. + RAND_MAX) * x)
 
+int N_SITES, size_y, size_x;
 
 static inline double sq2(double x, double y)
 {
 	return x * x + y * y;
 }
 
-#define for_k for (k = 0; k < N_SITES; k++)
-int nearest_site(double x, double y)
+
+int nearest_site(double x, double y, double site[][2])
 {
 	int k, ret = 0;
 	double d, dist = 0;
-	for_k {
+	for (k = 0; k < N_SITES; k++) {
 		d = sq2(x - site[k][0], y - site[k][1]);
 		if (!k || d < dist) {
 			dist = d, ret = k;
@@ -40,6 +31,7 @@ int nearest_site(double x, double y)
 	}
 	return ret;
 }
+
 
 /* see if a pixel is different from any neighboring ones */
 int at_edge(int *color, int y, int x)
@@ -56,8 +48,9 @@ int at_edge(int *color, int y, int x)
 	return 0;
 }
 
+
 #define AA_RES 32 /* average over 4x4 supersampling grid */
-void aa_color(unsigned char *pix, int y, int x)
+void aa_color(unsigned char *pix, int y, int x, double site[][2], unsigned char rgb[][3])
 {
 	int i, j, n;
 	double r = 0, g = 0, b = 0, xx, yy;
@@ -65,7 +58,7 @@ void aa_color(unsigned char *pix, int y, int x)
 		yy = y + 1. / AA_RES * i + .5;
 		for (j = 0; j < AA_RES; j++) {
 			xx = x + 1. / AA_RES * j + .5;
-			n = nearest_site(xx, yy);
+			n = nearest_site(xx, yy, site);
 			r += rgb[n][0];
 			g += rgb[n][1];
 			b += rgb[n][2];
@@ -76,22 +69,37 @@ void aa_color(unsigned char *pix, int y, int x)
 	pix[2] = b / (AA_RES * AA_RES);
 }
 
-#define for_i for (i = 0; i < size_y; i++)
-#define for_j for (j = 0; j < size_x; j++)
-void gen_map()
-{
+
+
+void gen_map(int N_SITES0, int size_x0, int size_y0, vector<int> x, vector<int> y )
+{	
 	int i, j, k;
+	N_SITES = N_SITES0;
+	size_x = size_x0;
+	size_y = size_y0;
+
+	double site[N_SITES][2];
+	unsigned char rgb[N_SITES][3];
+
+	for (k = 0; k < N_SITES; k++) {
+		site[k][0] = x[k] + size_x/2;
+		site[k][1] = y[k] + size_y/2;
+		rgb [k][0] = frand(256);
+		rgb [k][1] = frand(256);
+		rgb [k][2] = frand(256);
+	}
+
 	int *nearest = (int*)malloc(sizeof(int) * size_y * size_x);
 	unsigned char *ptr, *buf, color;
 
 	ptr = buf = (unsigned char*)(int*)malloc(3 * size_x * size_y);
-	for_i for_j nearest[i * size_x + j] = nearest_site(j, i);
+	for (i = 0; i < size_y; i++) for (j = 0; j < size_x; j++) nearest[i * size_x + j] = nearest_site(j, i, site);
 
-	for_i for_j {
+	for (i = 0; i < size_y; i++) for (j = 0; j < size_x; j++) {
 		if (!at_edge(nearest, i, j))
 			memcpy(ptr, rgb[nearest[i * size_x + j]], 3);
 		else	/* at edge, do anti-alias rastering */
-			aa_color(ptr, i, j);
+			aa_color(ptr, i, j, site, rgb);
 		ptr += 3;
 	}
 
@@ -110,8 +118,7 @@ void gen_map()
 			}
 		}
 	}
-
 	printf("P6\n%d %d\n255\n", size_x, size_y);
 	fflush(stdout);
 	fwrite(buf, size_y * size_x * 3, 1, stdout);
-}
+	}
