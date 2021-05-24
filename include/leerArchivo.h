@@ -44,7 +44,7 @@ int leerArchivo( string archivo, vector<int> &x, vector<int> &y, vector<int> &xy
     {
         std::cerr << "\nError al abrir el archivo fuente. Verifique la ruta y el nombre\n " << '\n';
         return -1;
-    }
+    } 
     try
     {
         while (getline(file1, str, '\n')) {	// reading x and then, y					
