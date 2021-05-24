@@ -25,8 +25,8 @@ using namespace std;
 vector<int> xy;								// store the x and y values.
 vector<int> x;								// store X values
 vector<int> y;								// store Y values
-vector<string> par_ordenado;				// store coordinate as text to plot on image
-bool error_flag = false;					// boolean flag for error tracking
+vector<string> par_ordenado;						// store coordinate as text to plot on image
+bool error_flag = false;						// boolean flag for error tracking
 
 
 
@@ -44,11 +44,19 @@ int main(int nargs, char *args[]){
 		N_SITES = leerArchivo(args[1], x, y, xy, par_ordenado);					// using file address argument (1)		
 		if (N_SITES==ERROR)
 		{
+			std::cerr << "\nError en la lectura del archivo fuente: leerArchivo.h retorna error\n";
 			return ERROR;
 		}
 		
-		gen_map(N_SITES, W, H, x, y);				    // gen voronoi diagram
-		drawtxt( xy, par_ordenado, "prueba.pnm", 6);	// draw coordinates as text over the diagram.
+		error_flag = gen_map(N_SITES, W, H, x, y);				    // gen voronoi diagram
+		
+		if (error_flag)
+		{
+			std::cerr << "\nError en la generacion del diagrama: gen_map retorna error\n";
+			return ERROR;
+		}
+
+		error_flag = drawtxt( xy, par_ordenado, "prueba.pnm", 6);	// draw coordinates as text over the diagram.
 		
 
 		if (error_flag)
@@ -61,3 +69,4 @@ int main(int nargs, char *args[]){
 	}
 }
 // end main
+
