@@ -71,7 +71,7 @@ void aa_color(unsigned char *pix, int y, int x, double site[][2], unsigned char 
 
 
 
-void gen_map(int N_SITES0, int size_x0, int size_y0, vector<int> x, vector<int> y )
+int gen_map(int N_SITES0, int size_x0, int size_y0, vector<int> x, vector<int> y )
 {	
 	int i, j, k;
 	N_SITES = N_SITES0;
@@ -121,4 +121,5 @@ void gen_map(int N_SITES0, int size_x0, int size_y0, vector<int> x, vector<int> 
 	printf("P6\n%d %d\n255\n", size_x, size_y);
 	fflush(stdout);
 	fwrite(buf, size_y * size_x * 3, 1, stdout);
+	return 0;
 	}
