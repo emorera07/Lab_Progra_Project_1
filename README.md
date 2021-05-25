@@ -22,7 +22,7 @@ sudo apt-get install -y fonts-fre;
 
 # How to run
 Entrar a la carpeta Lab_Progra_Project_1
-Dar permisos de ejecucion al archivo config.sh conn el siguiente comando
+Dar permisos de ejecución al archivo config.sh con el siguiente comando
 `sudo chmod +x config.sh`
 
 Instalar las dependencias y correr el cmake con el comando
@@ -35,3 +35,14 @@ Recordar que el archivo.txt debe estar en la carpeta data
 # Sobre la compilacion
 Al ejecutar verifique que la ruta del archivo de texto a leer es correcta, se generará en pantalla en resultado obtenido y se guardarán en /build las imagenes generadas, una .pnm sin texto y una .bmp con las coordenadas incluidas.
 
+# Sobre el uso de docker
+Entrar a la carpeta Lab_Progra_Project_1
+Dar permisos de ejecución al archivo docker.sh con el siguiente comando:
+`sudo chmod +x docker.sh`
+
+Para realizar la instalación de docker en su computador
+Se ejecuta el archivo docker.sh
+
+Para la ejecución del Docker se ejecuta el siguiente comando:
+`docker build --tag gtest_lab:latest .`
+El cual procede a realizar la instalación de las dependencias de la aplicación en el Docker gtest_lab:latest
