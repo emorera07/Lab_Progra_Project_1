@@ -43,6 +43,7 @@ int leerArchivo( string archivo, vector<int> &x, vector<int> &y, vector<int> &xy
     if (!file1.is_open())
     {
         std::cerr << "\nError al abrir el archivo fuente. Verifique la ruta y el nombre\n " << '\n';
+        std::cerr << archivo << endl;
         return -1;
     } 
     try
