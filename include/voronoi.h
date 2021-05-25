@@ -1,3 +1,13 @@
+/* Funcion Voronoi.h realiza el diagrama de voronoi con los datos de entrada leido en vectores, en una ventana de 640x480p */
+/* Adaptacion del codigo en C de la pagina Rosetta Voronoi examples. */
+
+/*DEFINES*/
+#ifndef VORONOI_H
+#define VORONOI_H
+#define frand(x) (rand() / (1. + RAND_MAX) * x)
+#define AA_RES 32 /* average over 4x4 supersampling grid */
+
+/*INCLUDES*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -6,19 +16,19 @@
 #include <vector>
 
 
-
+/*NAMESPACE*/
 using namespace std;
 
-#define frand(x) (rand() / (1. + RAND_MAX) * x)
-
+/*GLOBAL VAR*/
 int N_SITES, size_y, size_x;
 
+/*Obtiene la distancia en linea recta (raiz cuadrada, pitagorica) entre dos puntos x y, respecto a origen */
 static inline double sq2(double x, double y)
 {
 	return x * x + y * y;
 }
 
-
+/*calcula las distancias entre las caras/puntos y determina las distancias menores o mas cercanas entre si*/
 int nearest_site(double x, double y, double site[][2])
 {
 	int k, ret = 0;
@@ -33,7 +43,7 @@ int nearest_site(double x, double y, double site[][2])
 }
 
 
-/* see if a pixel is different from any neighboring ones */
+/* determina si un píxel es diferente de los vecinos */
 int at_edge(int *color, int y, int x)
 {
 	int i, j, c = color[y * size_x + x];
@@ -49,7 +59,7 @@ int at_edge(int *color, int y, int x)
 }
 
 
-#define AA_RES 32 /* average over 4x4 supersampling grid */
+/*determina los colores de los pixeles por cara del diagrama, dada una resolucion de pixel AA_RES y un vector RGB*/
 void aa_color(unsigned char *pix, int y, int x, double site[][2], unsigned char rgb[][3])
 {
 	int i, j, n;
@@ -70,28 +80,35 @@ void aa_color(unsigned char *pix, int y, int x, double site[][2], unsigned char 
 }
 
 
-
-void gen_map(int N_SITES0, int size_x0, int size_y0, vector<int> x, vector<int> y )
+/*Generacion del mapa diagrama de voronoi*/
+int gen_map(int N_SITES0, int size_x0, int size_y0, vector<int> x, vector<int> y )
 {	
 	int i, j, k;
 	N_SITES = N_SITES0;
 	size_x = size_x0;
 	size_y = size_y0;
-
 	double site[N_SITES][2];
 	unsigned char rgb[N_SITES][3];
 
-	for (k = 0; k < N_SITES; k++) {
+	try
+	{
+		for (k = 0; k < N_SITES; k++) {
 		site[k][0] = x[k] + size_x/2;
 		site[k][1] = y[k] + size_y/2;
 		rgb [k][0] = frand(256);
 		rgb [k][1] = frand(256);
 		rgb [k][2] = frand(256);
 	}
-
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << "\nError en la generacion de vector de coordenadas, en gen_map().\n Error: " << e.what() << '\n';
+		return 1; 						// activa la bandera error en main
+	}
+	
+	
 	int *nearest = (int*)malloc(sizeof(int) * size_y * size_x);
 	unsigned char *ptr, *buf, color;
-
 	ptr = buf = (unsigned char*)(int*)malloc(3 * size_x * size_y);
 	for (i = 0; i < size_y; i++) for (j = 0; j < size_x; j++) nearest[i * size_x + j] = nearest_site(j, i, site);
 
@@ -112,13 +129,14 @@ void gen_map(int N_SITES0, int size_x0, int size_y0, vector<int> x, vector<int> 
 
 			for (j = site[k][0] - 1; j <= site[k][0] + 1; j++) {
 				if (j < 0 || j >= size_x) continue;
-
 				ptr = buf + 3 * (i * size_x + j);
 				ptr[0] = ptr[1] = ptr[2] = color;
+				}
 			}
 		}
-	}
 	printf("P6\n%d %d\n255\n", size_x, size_y);
 	fflush(stdout);
 	fwrite(buf, size_y * size_x * 3, 1, stdout);
+	return 0;
 	}
+#endif

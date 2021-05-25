@@ -34,16 +34,22 @@ int drawtxt( vector<int> xy, vector<string> coordenadas, string archivo, int fon
     SDL_Color color = { 0, 0, 0 };      // Set color to black
     TTF_Init();                         // constructor INIT
     if ( TTF_Init() < 0 ) {             // checking for errors
-	    cout << "Error initializing SDL_ttf: " << TTF_GetError() << endl;
+	    std::cerr << "Error inicializando SDL_ttf: " << TTF_GetError() << endl;
+        return 1;       //error_flag is activated
     }
     font = TTF_OpenFont("../data/font.ttf", fontsize);          // opening font, must be in same folder
     if ( !font ) {                                      // getting nulls
-	    cout << "Failed to load font: " << TTF_GetError() << endl;
+	    cout << "Error al cargar el archivo fuente: " << TTF_GetError() << "\nVerifique que el archivo .fft esta ubicado en la carpeta /data \n"<< endl;
     }
     
     /* Loading the image */
     SDL_Init(SDL_INIT_VIDEO);                   // init video mode to render surfaces
     image = IMG_Load( archivo.c_str() );       // loads image, just change de extension .png or .pnm
+    if(!image) {
+        std::cerr << "Error al cargar la imagen generada por gen_map(), en: IMG_Load: \n" << IMG_GetError() << endl;
+        return 1;                              //error_flag is activated
+    }
+    
     int w = image->w;                           // getting image width
     int h = image->h;                           // getting image high
     dstrect.x = 0;                              // this four lines are to set a rectange (canva) to plot the image over,
@@ -92,7 +98,8 @@ int drawtxt( vector<int> xy, vector<string> coordenadas, string archivo, int fon
         const char * c = coordenadas[i].c_str();             // Cast string to const Char, needed for the Render Text process
         text = TTF_RenderText_Solid( font, c, color);   // Render text process call. using font file (font.tff), c string point and setted color
         if ( !text ) {
-    	    cout << "Failed to render text: " << TTF_GetError() << endl;    // getting error on NULL
+    	    std::cerr << "Error en TTF: Error al renderizar texto: " << TTF_GetError() << endl;    // getting error on NULL
+            return 1;
         }
         SDL_Rect dstrec;                                    // in each iteration, creating a new rectagle to plot, for a new point coordinate. fourth layer
         dstrec.x = w/2 + xy[j]*kx - xy[j];            // start point xy, applying scaling
@@ -118,6 +125,5 @@ int drawtxt( vector<int> xy, vector<string> coordenadas, string archivo, int fon
     TTF_Quit();                         // quit eviroment
     SDL_DestroyWindow(window);          // close eviroment
     SDL_Quit();                         // quit eviroment
-
-    return 0;
+    return 0;                           // no errors
 }
