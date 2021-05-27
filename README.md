@@ -37,15 +37,19 @@ Al ejecutar verifique que la ruta del archivo de texto a leer es correcta, se ge
 
 # Como correr las pruebas
 
-Manualmente, tras compilar el programa principal(o sino crear la carpeta build), desde la carpeta raíz, ir a test, compilar y ejecutar.:
+Manualmente, tras compilar el programa principal(o sino crear la carpeta build), desde la carpeta raíz, ir a build, compilar y ejecutar.:
 
-`cd test`
+`cd build`
 
-`g++ -I../include/ main.cpp -lgtest -lpthread -o ../build/tests`
+`g++ -I../include/ ../test/main.cpp -lgtest -lpthread -o tests`
 
-`../build/tests`
+`./tests`
 
+Este paso se realiza automaticamente en el config.sh por lo cual unicamente es necesario luego de ejecutar el config.sh ir a la carpeta build:
 
+`cd build`
+Y correr el archivo ejecutable
+`./tests`
 # Sobre el uso de docker
 Entrar a la carpeta Lab_Progra_Project_1
 Dar permisos de ejecución al archivo docker.sh con el siguiente comando:
