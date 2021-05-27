@@ -40,5 +40,7 @@ RUN mkdir -p /home/gtest_lab/build \
     && g++ ../src/main.cpp -o voronoi \
         `sdl2-config --cflags --libs` \
         -lSDL2 -lSDL2_image -lSDL2_ttf \
+    && g++ -I../include/ ../test/main.cpp \
+        -lgtest -lpthread -o tests \
     && cp voronoi /usr/bin/run_unittest \
     && chmod +x /usr/bin/run_unittest

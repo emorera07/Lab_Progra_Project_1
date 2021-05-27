@@ -45,11 +45,12 @@ Manualmente, tras compilar el programa principal(o sino crear la carpeta build),
 
 `./tests`
 
-Este paso se realiza automaticamente en el config.sh por lo cual unicamente es necesario luego de ejecutar el config.sh ir a la carpeta build:
+Este paso se realiza automaticamente en el config.sh y en el Dockerfile por lo cual unicamente es necesario luego de ejecutar el config.sh o bien en el el bash del Docker, ir a la carpeta build:
 
 `cd build`
 Y correr el archivo ejecutable
 `./tests`
+
 # Sobre el uso de docker
 Entrar a la carpeta Lab_Progra_Project_1
 Dar permisos de ejecución al archivo docker.sh con el siguiente comando:
@@ -59,5 +60,13 @@ Para realizar la instalación de docker en su computador
 Se ejecuta el archivo docker.sh
 
 Para la ejecución del Docker se ejecuta el siguiente comando:
-`docker build --tag gtest_lab:latest .`
+`sudo docker build --tag gtest_lab:latest .`
+
 El cual procede a realizar la instalación de las dependencias de la aplicación en el Docker gtest_lab:latest
+
+Para acceder al bash del docker utilizamos el siguiente comando:
+`sudo docker run -ti gtest_lab:latest bash`
+
+Para posicionarnos en la carpeta del proyecto en Docker se utiliza el siguiente comando:
+
+`cd /home/gtest_lab`
