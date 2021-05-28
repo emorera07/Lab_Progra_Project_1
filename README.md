@@ -59,7 +59,7 @@ Dar permisos de ejecución al archivo docker.sh con el siguiente comando:
 Para realizar la instalación de docker en su computador
 Se ejecuta el archivo docker.sh
 
-Para la ejecución del Docker se ejecuta el siguiente comando:
+Para la ejecución del Docker en Linux se ejecuta el siguiente comando:
 `sudo docker build --tag gtest_lab:latest .`
 
 El cual procede a realizar la instalación de las dependencias de la aplicación en el Docker gtest_lab:latest
